@@ -1,4 +1,4 @@
-FROM dleemoo/app-2.3.0:0.0.1
+FROM dleemoo/app-2.3.0:latest
 
 MAINTAINER Leonardo Lobo Lima <dleemoo@gmail.com>
 
@@ -6,6 +6,9 @@ ENV BUNDLER_VERSION=1.13.7 \
     PG_DOWNLOAD_SHA256=b85275da86e23981591865ce184ea5911f77506888215b334929b818eb6bfb61
 
 RUN set -ex \
+  # setup nodejs repository
+  && echo 'deb https://deb.nodesource.com/node_6.x jessie main' > /etc/apt/sources.list.d/nodesource.list \
+  && curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
   # sync debian and install app dependencies
   && apt-get update \
   && apt-get upgrade -y \
@@ -19,9 +22,6 @@ RUN set -ex \
   && CFLAGS="-O3 -pipe" ./configure --prefix=/usr/local 1>/dev/null \
   && make -j"$(getconf _NPROCESSORS_ONLN)" install 1>/dev/null 2>/dev/null \
   && cd / \
-  # setup nodejs repository
-  && echo 'deb https://deb.nodesource.com/node_6.x jessie main' > /etc/apt/sources.list.d/nodesource.list \
-  && curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
   # install bundler
   && gem install bundler -v $BUNDLER_VERSION \
   # remove apt cache and temporary files
