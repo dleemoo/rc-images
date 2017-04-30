@@ -28,7 +28,7 @@ RUN set -ex \
   && make -j"$(getconf _NPROCESSORS_ONLN)" install 1>/dev/null 2>/dev/null \
   && cd / \
   # install phantomjs binary
-  && apt-get install -y \
+  && apt-get install libfontconfig -y \
   && mkdir -p /tmp/phantom \
   && curl -sL https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -o /tmp/phantom.tar.bz2 \
   && tar xjf /tmp/phantom.tar.bz2 -C /tmp/phantom --strip-components=1 \
