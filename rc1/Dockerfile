@@ -11,8 +11,8 @@ RUN set -ex \
   && curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
   # sync debian and install app dependencies
   && apt-get update \
-  && apt-get upgrade -y \
-  && apt-get install git nodejs -y \
+  && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
+  && DEBIAN_FRONTEND=noninteractive apt-get install git nodejs imagemagick file -y \
   # setup postgres client libs and headers
   && curl -sL http://ftp.postgresql.org/pub/source/v9.6.1/postgresql-9.6.1.tar.gz -o /tmp/postgresql.tar.gz \
   && echo "$PG_DOWNLOAD_SHA256 /tmp/postgresql.tar.gz" | sha256sum -c - \
@@ -23,8 +23,8 @@ RUN set -ex \
   && make -j"$(getconf _NPROCESSORS_ONLN)" install 1>/dev/null 2>/dev/null \
   && cd / \
   # install bundler
-  && gem uninstall bundler -xav '> 1.13.7' 2>/dev/null \
   && gem install bundler -v $BUNDLER_VERSION \
+  && gem uninstall bundler -xav "> $BUNDLER_VERSION" 2>/dev/null || true \
   # remove apt cache and temporary files
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/postgresql*

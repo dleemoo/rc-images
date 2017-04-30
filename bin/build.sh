@@ -25,7 +25,6 @@ function build() {
 
 if [ ${#list[@]} -gt 0 ]; then
   for i in "${list[@]}"; do
-    build "${i}" "dleemoo/${i}" &&
     build "${i}" "dleemoo/${i}"
   done
 fi
