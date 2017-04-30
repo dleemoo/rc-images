@@ -23,6 +23,7 @@ RUN set -ex \
   && make -j"$(getconf _NPROCESSORS_ONLN)" install 1>/dev/null 2>/dev/null \
   && cd / \
   # install bundler
+  && gem uninstall bundler -xav '> 1.13.7' 2>/dev/null \
   && gem install bundler -v $BUNDLER_VERSION \
   # remove apt cache and temporary files
   && apt-get clean \
