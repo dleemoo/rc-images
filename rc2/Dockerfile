@@ -27,17 +27,11 @@ RUN set -ex \
   && CFLAGS="-O3 -pipe" ./configure --prefix=/usr/local 1>/dev/null \
   && make -j"$(getconf _NPROCESSORS_ONLN)" install 1>/dev/null 2>/dev/null \
   && cd / \
-  # install phantomjs binary
-  && apt-get install libfontconfig -y \
-  && mkdir -p /tmp/phantom \
-  && curl -sL https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -o /tmp/phantom.tar.bz2 \
-  && tar xjf /tmp/phantom.tar.bz2 -C /tmp/phantom --strip-components=1 \
-  && mv /tmp/phantom/bin/phantomjs /usr/local/bin/ \
   # install bundler
   && gem install bundler -v $BUNDLER_VERSION \
   # remove apt cache and temporary files
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/phantom* /tmp/postgresql*
+  && rm -rf /var/lib/apt/lists/* /tmp/postgresql*
 
 # If you need root access to container use following command:
 # docker run --rm -it --entrypoint=/bin/bash dleemoo/rc2
