@@ -16,7 +16,7 @@ RUN set -ex \
   # sync debian and install app dependencies
   && apt-get update \
   && apt-get upgrade -y \
-  && apt-get install nodejs yarn git python -y \
+  && apt-get install nodejs yarn git python imagemagick -y \
   # setup postgres client libs and headers
   && curl -sL http://ftp.postgresql.org/pub/source/v9.6.2/postgresql-9.6.2.tar.gz -o /tmp/postgresql.tar.gz \
   && echo "$PG_DOWNLOAD_SHA256 /tmp/postgresql.tar.gz" | sha256sum -c - \
