@@ -2,7 +2,7 @@ FROM dleemoo/app-2.3.1:latest
 
 MAINTAINER Leonardo Lobo Lima <dleemoo@gmail.com>
 
-ENV BUNDLER_VERSION=1.15.1 \
+ENV BUNDLER_VERSION=1.15.3 \
     PG_DOWNLOAD_SHA256=a6856099959bfff7cf0889b0e637b0f04642e8a9e8cbfa3f92555a03ef3b2448
 
 ARG DEBIAN_FRONTEND=noninteractive
