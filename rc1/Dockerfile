@@ -27,7 +27,7 @@ RUN set -ex \
   # install app dependencies
   && DEBIAN_FRONTEND=noninteractive apt-get install git nodejs imagemagick file -y
 
-ENV BUNDLER_VERSION=1.15.1
+ENV BUNDLER_VERSION=1.15.2
 
 RUN set -ex \
   # install bundler and clear caches
