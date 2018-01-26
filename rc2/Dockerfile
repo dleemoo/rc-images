@@ -2,14 +2,14 @@ FROM dleemoo/app-2.3.1:latest
 
 MAINTAINER Leonardo Lobo Lima <dleemoo@gmail.com>
 
-ENV BUNDLER_VERSION=1.15.4 \
-    PG_DOWNLOAD_SHA256=a6856099959bfff7cf0889b0e637b0f04642e8a9e8cbfa3f92555a03ef3b2448
+ENV BUNDLER_VERSION=1.16.1 \
+    PG_DOWNLOAD_SHA256=df088372230b1dd21d87bb81686471508f4c42094d4f4f32b5d8e686fea69fa6
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN set -ex \
   # adds nodejs and yarn debian repository
-  && echo 'deb https://deb.nodesource.com/node_6.x jessie main' > /etc/apt/sources.list.d/nodesource.list \
+  && echo 'deb https://deb.nodesource.com/node_8.x jessie main' > /etc/apt/sources.list.d/nodesource.list \
   && curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -18,7 +18,7 @@ RUN set -ex \
   && apt-get upgrade -y \
   && apt-get install nodejs yarn git python imagemagick -y \
   # setup postgres client libs and headers
-  && curl -sL http://ftp.postgresql.org/pub/source/v9.6.2/postgresql-9.6.2.tar.gz -o /tmp/postgresql.tar.gz \
+  && curl -sL http://ftp.postgresql.org/pub/source/v9.6.3/postgresql-9.6.3.tar.gz -o /tmp/postgresql.tar.gz \
   && echo "$PG_DOWNLOAD_SHA256 /tmp/postgresql.tar.gz" | sha256sum -c - \
   && mkdir -p /tmp/postgresql \
   && tar -xzf /tmp/postgresql.tar.gz -C /tmp/postgresql --strip-components=1 \
