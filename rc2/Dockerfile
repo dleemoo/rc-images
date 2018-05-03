@@ -3,7 +3,7 @@ FROM dleemoo/app-2.3.1:latest
 MAINTAINER Leonardo Lobo Lima <dleemoo@gmail.com>
 
 ENV BUNDLER_VERSION=1.16.1 \
-    PG_DOWNLOAD_SHA256=df088372230b1dd21d87bb81686471508f4c42094d4f4f32b5d8e686fea69fa6
+    PG_DOWNLOAD_SHA256=53e1cd5fdff5f45415ae9d5b645177275265a3e800c86becbb94ce183a3a5061
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -18,7 +18,7 @@ RUN set -ex \
   && apt-get upgrade -y \
   && apt-get install nodejs yarn git python imagemagick -y \
   # setup postgres client libs and headers
-  && curl -sL http://ftp.postgresql.org/pub/source/v9.6.3/postgresql-9.6.3.tar.gz -o /tmp/postgresql.tar.gz \
+  && curl -sL http://ftp.postgresql.org/pub/source/v9.6.6/postgresql-9.6.6.tar.gz -o /tmp/postgresql.tar.gz \
   && echo "$PG_DOWNLOAD_SHA256 /tmp/postgresql.tar.gz" | sha256sum -c - \
   && mkdir -p /tmp/postgresql \
   && tar -xzf /tmp/postgresql.tar.gz -C /tmp/postgresql --strip-components=1 \
