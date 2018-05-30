@@ -9,7 +9,12 @@ if [ -z "$1" ]; then
 else
   declare -a list=()
   for i in $@; do
-    [[ "${all_versions[@]}" =~ "$i" ]] && list=(${list[@]} $i)
+    if [[ " ${all_versions[@]} " =~ " $i " ]]; then
+      list=(${list[@]} $i)
+    else
+      echo "Invalid version: $i" >&2
+      exit
+    fi
   done
 fi
 
@@ -20,6 +25,8 @@ function build() {
   cd $dir \
      && docker build --rm -t $repo:latest . \
      && docker tag $repo:latest $repo:$(cat VERSION) \
+     && echo "$repo:$(cat VERSION) is the lastest" \
+     && echo -e "\n============\n" \
      && cd $root_dir
 }
 
