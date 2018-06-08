@@ -1,4 +1,4 @@
-FROM dleemoo/app-2.3.1:0.0.3
+FROM dleemoo/app-2.5.1:0.0.3
 
 MAINTAINER Leonardo Lobo Lima <dleemoo@gmail.com>
 
