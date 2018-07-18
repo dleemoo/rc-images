@@ -3,7 +3,6 @@ FROM dleemoo/app-2.3.7:0.0.1
 MAINTAINER Leonardo Lobo Lima <dleemoo@gmail.com>
 
 ENV PG_DOWNLOAD_SHA256=b85275da86e23981591865ce184ea5911f77506888215b334929b818eb6bfb61
-ENV BUNDLER_VERSION=1.15.2
 
 RUN set -ex \
   # setup nodejs repository
@@ -23,9 +22,6 @@ RUN set -ex \
   && rm -rf /tmp/postgresql* \
   # install app dependencies
   && DEBIAN_FRONTEND=noninteractive apt-get install git nodejs imagemagick file -y \
-  # install bundler and clear caches
-  && gem install bundler -v $BUNDLER_VERSION \
-  && gem uninstall bundler -xav "> $BUNDLER_VERSION" 2>/dev/null || true \
   # remove apt cache and temporary files
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
