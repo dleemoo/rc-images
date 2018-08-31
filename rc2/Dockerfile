@@ -17,6 +17,7 @@ RUN set -ex \
   && apk add --no-cache \
       build-base \
       curl \
+      file \
       git \
       imagemagick \
       less \
@@ -24,8 +25,8 @@ RUN set -ex \
       libxslt-dev \
       nodejs \
       postgresql-dev \
-      python3 \
       python2 \
+      python3 \
       readline \
       readline-dev \
       tzdata \
