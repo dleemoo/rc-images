@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 root_dir=$(pwd)
+docker_user=dleemoo
 
 declare -a all_versions=(rc1 rc2)
 
@@ -23,7 +24,7 @@ function build() {
   repo=$2
 
   cd $dir \
-     && docker build --rm -t $repo:latest . \
+     && docker build --build-arg USER_ID=$UID --rm -t $repo:latest . \
      && docker tag $repo:latest $repo:$(cat VERSION) \
      && echo "$repo:$(cat VERSION) is the lastest" \
      && echo -e "\n============\n" \
@@ -32,6 +33,6 @@ function build() {
 
 if [ ${#list[@]} -gt 0 ]; then
   for i in "${list[@]}"; do
-    build "${i}" "dleemoo/${i}"
+    build "${i}" "${docker_user}/${i}"
   done
 fi
